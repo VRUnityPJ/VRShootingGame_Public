@@ -10,12 +10,12 @@ Releaseからダウンロードできます。
 - Windows
 - なんらかのVR機器(Quest2, PICO4にて動作確認済み)
 
-Unity上で動作を確認するには以下のライブラリのインポートが必須です。
-- NCMB
-  
-  インストールガイド：https://mbaas.nifcloud.com/doc/current/introduction/quickstart_unity.html
-  
-  パッケージURL：https://github.com/NIFCLOUD-mbaas/ncmb_unity/releases
+Unity上で動作を確認するには以下のライブラリのインポートが必須です。 \
+~~NCMB~~　(ver1.2以降では必要ありません)
+
+  ~~インストールガイド：https://mbaas.nifcloud.com/doc/current/introduction/quickstart_unity.html~~
+
+  ~~パッケージURL：https://github.com/NIFCLOUD-mbaas/ncmb_unity/releases~~
 
 - DOTween or DOTween Pro
 
