@@ -1,15 +1,16 @@
 using System;
+using Ranking.Scripts.Interface;
 using UnityEngine;
 
 namespace VRShooting.Scripts.Ranking
 {
     public class PointStorage : MonoBehaviour
     {
-        private static Point NowPoint;
+        public static Point NowPoint { get; private set; }
 
         private void Awake()
         {
-            NowPoint = new Point();
+            NowPoint = new Point(0);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace VRShooting.Scripts.Ranking
         }
     }
 
-    public class Point
+    public class Point : IRankingDataElement<Point>
     {
         public int point { get; }
         public Point(int _init = 0)

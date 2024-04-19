@@ -9,14 +9,6 @@ public class BoardMover : MonoBehaviour
     [SerializeField] private GameObject[] panels;
     private int num = 1;
 
-
-    async void Start()
-    {
-        await UniTask.Delay(TimeSpan.FromSeconds(15f));
-        panels[num].SetActive(false);
-        panels[num+1].SetActive(false);
-    }
-
     public void ToLeft()
     {
         panels[num-1].SetActive(false);

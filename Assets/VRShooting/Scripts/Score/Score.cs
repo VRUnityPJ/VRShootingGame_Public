@@ -1,8 +1,9 @@
 ﻿using System;
+using Ranking.Scripts.Interface;
 
 namespace VRShooting.Scripts.Score
 {
-    public class Score
+    public class Score : IRankingDataElement<Score>
     {
         /// <summary>
         /// スコアの値

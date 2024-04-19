@@ -30,6 +30,7 @@ namespace VRShooting.Scripts.UI
         [SerializeField, Required]
         private Text _scoreText;
         
+        
         /// <summary>
         /// 難易度表示用のテキスト
         /// </summary>
@@ -69,14 +70,7 @@ namespace VRShooting.Scripts.UI
             // テキストの書き換え
             _nickNameText.text = $"名前 ： {PlayerNameStorage.GetPlayerName()}";
             _scoreText.text = $"スコア ： {PointStorage.GetPoint()}";
-            if (StageData.isHard)
-            {
-                _modeText.text = $"難易度　：　Hard";
-            }
-            else
-            {
-                _modeText.text = $"難易度　：　Normal";
-            }
+            _modeText.text = StageData.IsHardStage() ? "Hard" : "Normal";
             // データをランキングに登録
             RankingRegister.Register();
             

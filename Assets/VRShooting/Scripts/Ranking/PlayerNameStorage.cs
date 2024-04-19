@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
-using Cysharp.Threading.Tasks;
+using Ranking.Scripts.Interface;
 using UnityEngine;
 
 public class PlayerNameStorage : MonoBehaviour
 {
-    private static PlayerName NowPlayerName;
+    public static PlayerName NowPlayerName { get; private set; }
     private void Awake()
     {
         NowPlayerName = new PlayerName();
@@ -36,7 +34,7 @@ public class PlayerNameStorage : MonoBehaviour
 
 
 
-public class PlayerName
+public class PlayerName:IRankingDataElement<PlayerName>
 {
     public string name { get;}
     public PlayerName(string _name = "")

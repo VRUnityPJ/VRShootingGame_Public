@@ -518,6 +518,7 @@ MonoBehaviour:
   updater: {fileID: 15226284}
   stageName: Stage3
   panel: {fileID: 746621314}
+  _rankingTypes: 0200000005000000
 --- !u!1 &16851852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1289,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 91024068}
   m_OnClick:
     m_PersistentCalls:
@@ -2088,7 +2089,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4160934a92ce134e9175623257b602d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b1c07800bde82b040874d4ce4bb0630f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2700,84 +2701,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1001 &203812281
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8914054300473263732, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: clientKey
-      value: 737b9bac3e85480612d4535744b86890d71553371c845033afcd901d8720bc77
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263732, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: applicationKey
-      value: d2e7d077a37af6e8f988b5d3f4ca1c4a3bf427522cd6acd93637673b3b530100
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263733, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8914054300473263735, guid: 8cdbe3a139ec248b19816b3201bcf817,
-        type: 3}
-      propertyPath: m_Name
-      value: NCMBSettings
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8cdbe3a139ec248b19816b3201bcf817, type: 3}
 --- !u!1 &204107688
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,6 +4465,7 @@ MonoBehaviour:
   updater: {fileID: 301572912}
   stageName: Stage2
   panel: {fileID: 1933486772}
+  _rankingTypes: 0400000001000000
 --- !u!114 &301572912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4909,6 +4833,7 @@ MonoBehaviour:
   updater: {fileID: 341322198}
   stageName: Stage1
   panel: {fileID: 1940615263}
+  _rankingTypes: 0000000003000000
 --- !u!114 &341322198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5371,7 +5296,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 399952078}
   m_OnClick:
     m_PersistentCalls:
@@ -6083,7 +6008,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 469650980}
   m_OnClick:
     m_PersistentCalls:
@@ -8984,7 +8909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &746621315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13103,7 +13028,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1161283281}
   m_OnClick:
     m_PersistentCalls:
@@ -13647,6 +13572,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1202281535}
   - component: {fileID: 1202281536}
+  - component: {fileID: 1202281537}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -13685,6 +13611,18 @@ MonoBehaviour:
   - {fileID: 1940615263}
   - {fileID: 1933486772}
   - {fileID: 746621314}
+--- !u!114 &1202281537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1202281533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5c67546d1204847bbcbaba9c77e387, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1213874671
 GameObject:
   m_ObjectHideFlags: 0
@@ -16680,7 +16618,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4160934a92ce134e9175623257b602d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7df64335b6e3f03438fc95292377c87c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -16755,7 +16693,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f4160934a92ce134e9175623257b602d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5fc81c1d79c74704abe20c3cb5c45123, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -21459,7 +21397,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1933486773
 RectTransform:
   m_ObjectHideFlags: 0
@@ -24128,5 +24066,4 @@ SceneRoots:
   - {fileID: 1777468534}
   - {fileID: 1379971714}
   - {fileID: 450556158}
-  - {fileID: 203812281}
   - {fileID: 1202281535}

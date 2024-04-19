@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using NCMB;
+using Cysharp.Threading.Tasks;
+using Ranking.Scripts.DataBase;
 using UnityEngine;
 
-//TODO ここら辺の読みにくいコードをなおす
 namespace VRShooting.Scripts.Ranking
 {
     public class RankingStorage : MonoBehaviour
@@ -12,130 +9,93 @@ namespace VRShooting.Scripts.Ranking
         [SerializeField] private BoardUpdater updater;
         [SerializeField] private string stageName;
         [SerializeField] private GameObject panel;
-        private List<Record> nowNormalRanking = new List<Record>();
-        private List<Record> nowHardRanking = new List<Record>();
+        [SerializeField] private RankingType[] _rankingTypes;
+        private RankingData[] nowNormalData, nowHardData;
+        private bool isMoving = true;
 
-        private void Start()
+        private void Awake()
         {
-            for (int i = 0; i < 5; i++)
-            {
-                var record = new Record();
-                nowNormalRanking.Add(record);
-                nowHardRanking.Add(record);
-            }
+            nowHardData = new RankingData[5]{null,null,null,null,null};
+            nowNormalData = new RankingData[5]{null,null,null,null,null};
         }
 
         private void OnEnable()
         {
-            StartCoroutine(Flow());
+            isMoving = true;
+            Flow();
         }
 
         private void OnDisable()
         {
-            StopCoroutine(Flow()); 
+            isMoving = false;
         }
 
-        private IEnumerator Flow()
+        private async void Flow()
         {
-            yield return new WaitForSeconds(1);
-            GetNewRanking();
-            StartCoroutine(Flow());
-            yield return new WaitForSeconds(9);
+            if (!isMoving) return;
+            await UniTask.Delay(1000);
+            foreach (var type in _rankingTypes)
+            {
+                RankingData[] data = await PlayFabManager.GetLeaderboardAsync(5,type);
+                //データが前回と同じなら更新しない
+                if(IsEqual(data,type))
+                    continue;
+                updater.UpdateRanking(data,type);
+            }
+
+            //合計10秒のインターバル
+            await UniTask.Delay(9000);
+            Flow();
         }
-        
-        public void GetNewRanking()
+
+        //Rankingdataを比べる
+        private bool IsEqual(RankingData[] data ,RankingType type)
         {
-            var newNormalRanking = new List<Record>();
-            var newHardRanking = new List<Record>();
+            Debug.Log($"{type} {(int)type}");
             
-            NCMBQuery<NCMBObject> hardQuery = new NCMBQuery<NCMBObject>(stageName);
-
-            hardQuery.WhereEqualTo("IsHard", true);
-            //Scoreを元に降順に並べる
-            hardQuery.OrderByDescending("Score");
-            //参照数を5に制限
-            hardQuery.Limit = 5;
             
-            hardQuery.Find((List<NCMBObject> objList, NCMBException e) =>
+            RankingData[] nowData;
+            //Hardモードの判別
+            if ((int)type >= 3)
             {
-                if (e != null)
-                {
-                    Debug.Log("取得失敗");
-                }
-                else
-                {
-                    foreach (var obj in objList)
-                    {
-                        var record = new Record();
-
-                        record.name = Convert.ToString(obj["Name"]);
-                        record.score = Convert.ToInt32(obj["Score"]);
-                        Debug.Log(record.name + record.score);
-                        newHardRanking.Add(record);
-                    }
-                    
-                    for (int i = 0; i < newHardRanking.Count; i++)
-                    {
-                        if (nowHardRanking[i].score != newHardRanking[i].score || nowHardRanking[i].name != newHardRanking[i].name)
-                        {
-                            nowHardRanking = newHardRanking;
-                            List<List<Record>> record = new List<List<Record>>();
-                            record.Add(nowNormalRanking);
-                            record.Add(nowHardRanking);
-                            updater.UpdateRanking(record);
-                            return;
-                        }
-                    }
-                    
-                }
-            });
-            
-            NCMBQuery<NCMBObject> normalQuery = new NCMBQuery<NCMBObject>(stageName);
-            
-            normalQuery.WhereEqualTo("IsHard", false);
-            //Scoreを元に降順に並べる
-            normalQuery.OrderByDescending("Score");
-            //参照数を5に制限
-            normalQuery.Limit = 5;
-            
-            normalQuery.Find((List<NCMBObject> objList, NCMBException e) =>
+                nowData = nowHardData;
+            }
+            else
             {
-                if (e != null)
+                nowData = nowNormalData;
+            }
+
+            if (nowData[0] == null)
+            {
+                UpdateNowData(data,type);
+                return false;
+            }
+            
+            for (int i = 0; i < nowData.Length; i++)
+            {
+                if (data[i].GetData<Point>().point != nowData[i].GetData<Point>().point)
                 {
-                    Debug.Log("取得失敗");
+                    UpdateNowData(data,type);
+                    return false;
                 }
-                else
-                {
-                    foreach (var obj in objList)
-                    {
-                        var record = new Record();
-                        record.name = Convert.ToString(obj["Name"]);
-                        record.score = Convert.ToInt32(obj["Score"]);
-                        Debug.Log(record.name + record.score);
-                        newNormalRanking.Add(record);
-                    }
-                    
-                    for (int i = 0; i < newNormalRanking.Count; i++)
-                    {
-                        if (nowNormalRanking[i].score != newNormalRanking[i].score || nowNormalRanking[i].name != newNormalRanking[i].name)
-                        {
-                            nowNormalRanking = newNormalRanking;
-                            List<List<Record>> record = new List<List<Record>>();
-                            record.Add(nowNormalRanking);
-                            record.Add(nowHardRanking);
-                            updater.UpdateRanking(record);
-                            return;
-                        }
-                    }
-                    
-                }
-            });
+            }
+
+            return true;
         }
-    }
 
-    public class Record
-    {
-        public string name;
-        public int score;
+        //Nowdataを更新する
+        private void UpdateNowData(RankingData[] data,RankingType type)
+        {
+            //nowDataを更新
+            if ((int)type >= 3)
+            {
+                nowHardData  = data;
+            }
+            else
+            {
+                nowNormalData = data;
+            }
+
+        }
     }
 }

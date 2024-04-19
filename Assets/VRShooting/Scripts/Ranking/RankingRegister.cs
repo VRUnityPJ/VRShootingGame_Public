@@ -1,4 +1,4 @@
-using NCMB;
+using Ranking.Scripts.DataBase;
 using VRShooting.Scripts.Ranking;
 
 public class RankingRegister
@@ -8,18 +8,14 @@ public class RankingRegister
     /// </summary>
     public static void Register()
     {
-        var finalPoint = PointStorage.GetPoint();
-        var playerName = PlayerNameStorage.GetPlayerName();
-        bool isHard = StageData.isHard;
-        int stageNum = StageData.stageNumber;
+        var finalPoint = PointStorage.NowPoint;
+        var playerName = PlayerNameStorage.NowPlayerName;
+        RankingType stageType = StageData.stagetype;
+
+        var data = RankingData.GenerateRankingDataWithoutDictionary();
+        data.UpdateData(finalPoint);
+        data.UpdateData(playerName);
         
-        NCMBObject obj = new NCMBObject("Stage" + StageData.stageNumber.ToString());
-        
-        obj["Name"] = playerName;
-        obj["Score"] = finalPoint;
-        obj["IsHard"] = isHard;
-        obj["StageNumber"] = stageNum;
-        
-        obj.SaveAsync();
+        PlayFabManager.RegisterRankingData(data,StageData.stagetype);
     }
 }

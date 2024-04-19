@@ -1,8 +1,7 @@
-using System.Collections.Generic;
 using DG.Tweening;
+using Ranking.Scripts.DataBase;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace VRShooting.Scripts.Ranking
@@ -18,6 +17,12 @@ namespace VRShooting.Scripts.Ranking
         {
             normalNameTexts = NormalName.GetComponentsInChildren<TextMeshProUGUI>();
             hardNameTexts = HardName.GetComponentsInChildren<TextMeshProUGUI>();
+
+            for (int i = 0; i < normalNameTexts.Length; i++)
+            {
+                normalNameTexts[i].text = "0" + "\n" + "none";
+                hardNameTexts[i].text = "0" + "\n" + "none";
+            }
         }
 
         public void FadeOut()
@@ -59,12 +64,30 @@ namespace VRShooting.Scripts.Ranking
             seq.Restart();
         }
 
-        public void UpdateText(List<List<Record>> records)
+        public void UpdateNormalText(RankingData[] records)
         {
-            for (int i = 0; i < normalNameTexts.Length; i++)
+            if(records.Length != normalNameTexts.Length)
+                Debug.Log("取得したランキングの数がリーダーボードと一致していません");
+            
+            for (int i = 0; i < records.Length; i++)
             {
-                normalNameTexts[i].text =  records[0][i].score.ToString()+ "\n" + records[0][i].name;
-                hardNameTexts[i].text =  records[1][i].score.ToString()+ "\n" + records[1][i].name;
+                Point point = records[i].GetData<Point>();
+                PlayerName name = records[i].GetData<PlayerName>();
+
+                normalNameTexts[i].text = point.point.ToString() + "\n" + name.name;
+            }
+        }
+        public void UpdateHardText(RankingData[] records)
+        {
+            if(records.Length != hardNameTexts.Length)
+                Debug.Log("取得したランキングの数がリーダーボードと一致していません");
+            
+            for (int i = 0; i < records.Length; i++)
+            {
+                Point point = records[i].GetData<Point>();
+                PlayerName name = records[i].GetData<PlayerName>();
+
+                hardNameTexts[i].text = point.point.ToString() + "\n" + name.name;
             }
         }
     }

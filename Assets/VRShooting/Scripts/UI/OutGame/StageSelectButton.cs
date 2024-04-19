@@ -13,8 +13,7 @@ namespace VRShooting.Scripts.UI
     public class StageSelectButton : VRButton
     {
         [SerializeField, Scene,Space,Required] private string sceneName;
-        [SerializeField, Space,Required] private bool hardStageButton = false;
-        [SerializeField, Space,Required] private int stageNumber;
+        [SerializeField, Space, Required] private RankingType _stagetype;
         
         [SerializeField,Space] private Color pointedColor;
         [SerializeField] private Color defaultColor;
@@ -75,13 +74,10 @@ namespace VRShooting.Scripts.UI
 
         public void Clicked()
         {
-            if (hardStageButton)
-                StageData.isHard = true;
-    
             if(clickedSE != null)
                 AudioPlayer.PlayOneShotAudioAtPoint(clickedSE, transform.position);
 
-            StageData.stageNumber = stageNumber;
+            StageData.stagetype = _stagetype;
             SceneManager.LoadScene(sceneName);
         }
     }

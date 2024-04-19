@@ -9,17 +9,19 @@ namespace VRShooting.Scripts.Ranking
     /// </summary>
     public class StageData : MonoBehaviour
     {
-        public static bool isHard;
-        public static int stageNumber = 1;
+        public static RankingType stagetype = RankingType.Null;
 
-        private const int MAX_STAGE_NUMBER = 3;
-        private const int MIN_STAGE_NUMBER = 1;
-        private void Awake()
+        ///今HardStageかどうか
+        public static bool IsHardStage()
         {
-            isHard = false;
-            Debug.Log(stageNumber);
-            if (stageNumber is < MIN_STAGE_NUMBER or > MAX_STAGE_NUMBER)
-                throw new IndexOutOfRangeException("StageNumberが不正な値です");
+            if ((int)stagetype < 3)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

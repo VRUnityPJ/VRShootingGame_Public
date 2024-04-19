@@ -40,14 +40,8 @@ namespace VRShooting.Scripts.Enemy
 
         private bool IsHardScene()
         {
-            // foreach (var sceneName in _hardSceneNames)
-            // {
-            //     if (sceneName == SceneManager.GetActiveScene().name)
-            //         return true;
-            // }
-            //
-            // return false;
-            return StageData.isHard;
+            //ステージタイプが2以下でなかった場合hard
+            return !((int)StageData.stagetype < 3);
         }
     }
 }
